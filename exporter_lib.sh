@@ -58,7 +58,10 @@ function exporter_add_metric() {
 	if [ -n "$metric_description" ]; then
 		metrics_array+=("# HELP $metric_name $metric_description")
 	fi
-	metrics_array+=("# TYPE $metric_name gauge")
+	# silently skip unrecognized $metric_type
+	if [ "$metric_type" == "gauge" -o "$metric_type" == "counter" ]
+		metrics_array+=("# TYPE $metric_name $metric_type")
+	fi
 	shift 3
 	while (( "$#" )); do
 		local metric_labels=()
