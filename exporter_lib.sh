@@ -59,7 +59,7 @@ function exporter_add_metric() {
 		metrics_array+=("# HELP $metric_name $metric_description")
 	fi
 	# silently skip unrecognized $metric_type
-	if [ "$metric_type" == "gauge" -o "$metric_type" == "counter" ]
+	if [ "$metric_type" == "gauge" -o "$metric_type" == "counter" ]; then
 		metrics_array+=("# TYPE $metric_name $metric_type")
 	fi
 	shift 3
